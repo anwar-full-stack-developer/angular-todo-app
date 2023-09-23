@@ -1,0 +1,48 @@
+<div class="p-4">
+    <div class="container">
+        <h1>{{title}}</h1>
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Task</label>
+                    <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['task'].errors }" />
+                    <div *ngIf="submitted && f['task'].errors" class="invalid-feedback">
+                        <div *ngIf="f['task'].errors['required']">Task is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <label class="form-label">Details</label>
+                    <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['details'].errors }" />
+                    <div *ngIf="submitted && f['details'].errors" class="invalid-feedback">
+                        <div *ngIf="f['details'].errors['required']">Details is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Status</label>
+                    <select type="text" formControlName="status" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['status'].errors }" >
+                        <option value="Pending">Pending</option>
+                        <option value="In-progress">In-progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    
+                    <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+                        <div *ngIf="f['status'].errors['required']">Status is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Save
+                </button>
+                <a routerLink="/todo/list" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+    </div>
+</div>
